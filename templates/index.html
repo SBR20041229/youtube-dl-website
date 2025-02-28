@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>YouTube Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- 添加 PWA 支援 -->
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#ff0000">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icon-192.png') }}">
+</head>
+<body>
+    <div class="container mobile-friendly">
+        <h1>YouTube Video Downloader</h1>
+        
+        <!-- 解析影片的表單 -->
+        <form method="post">
+            <div class="form-group">
+                <input type="url" name="url" placeholder="輸入 YouTube 網址" required>
+                <button type="submit" id="parseButton">
+                    <span class="loading" style="display: none;"></span>
+                    解析影片
+                </button>
+            </div>
+        </form>
+
+        {% if video_info %}
+        <!-- 下載影片的表單 -->
+        <form method="post" class="video-preview mobile-card">
+            <img src="{{ video_info.thumbnail }}" alt="縮圖">
+            <h3>{{ video_info.title }}</h3>
+            
+            <div class="download-options mobile-options">
+                <div class="input-group">
+                    <input type="text" name="filename" placeholder="檔名（不含副檔名）" 
+                           value="{{ video_info.title|safe }}" required class="mobile-input">
+                    
+                    <select name="format" class="mobile-select">
+                        {% for f in video_info.formats %}
+                        <option value="{{ f.format_id }}">
+                            {{ f.resolution }} - {{ f.ext }} ({{ f.format_note }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <input type="hidden" name="original_url" value="{{ original_url }}">
+                <button type="submit" name="download" value="1" class="mobile-button">下載影片</button>
+            </div>
+        </form>
+        {% endif %}
+
+        <div class="disclaimer">
+            <p>⚠️ 請遵守 YouTube 服務條款，僅下載您有權下載的影片</p>
+        </div>
+    </div>
+    <script>
+    document.querySelector('form').addEventListener('submit', function() {
+        const button = document.getElementById('parseButton');
+        const loading = button.querySelector('.loading');
+        loading.style.display = 'inline-block';
+        button.disabled = true;
+    });
+    </script>
+</body>
+</html>

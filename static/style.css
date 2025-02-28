@@ -1,0 +1,278 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    background: linear-gradient(120deg, #f5f5f5, #e0e0e0);
+    min-height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input[type="url"], input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    background-color: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+input[type="url"]:focus,
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: #ff0000;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.video-preview {
+    margin-top: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    padding: 15px;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.video-preview:hover {
+    transform: translateY(-5px);
+}
+
+.video-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.video-preview img:hover {
+    transform: scale(1.02);
+}
+
+.disclaimer {
+    margin-top: 30px;
+    color: #666;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.download-options {
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #ff0000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+    
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip:hover::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background-color: #333;
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* 手機版特定樣式 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        background: #f5f5f5;
+    }
+
+    .container {
+        padding: 15px;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .mobile-friendly {
+        max-width: 100%;
+    }
+
+    .mobile-card {
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    .mobile-options {
+        padding: 15px;
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .mobile-input,
+    .mobile-select {
+        height: 44px; /* 更大的觸控區域 */
+        font-size: 16px; /* 避免 iOS 縮放 */
+        -webkit-appearance: none; /* 移除預設樣式 */
+        margin: 0;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+    .mobile-button {
+        width: 100%;
+        height: 44px;
+        margin-top: 15px;
+        font-size: 16px;
+        border-radius: 8px;
+        background: #ff0000;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .video-preview img {
+        border-radius: 12px;
+        margin: 10px 0;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin: 10px 0;
+    }
+
+    h3 {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    .disclaimer {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    /* 改善觸控回饋 */
+    button:active,
+    .mobile-button:active {
+        transform: scale(0.98);
+        background-color: #cc0000;
+    }
+
+    /* 底部安全區域 */
+    .container {
+        padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
+    }
+}
+
+/* 深色模式支援 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #1a1a1a;
+        color: #fff;
+    }
+
+    .container {
+        background: #2d2d2d;
+    }
+
+    .mobile-input,
+    .mobile-select {
+        background: #333;
+        color: #fff;
+        border-color: #444;
+    }
+
+    .download-options {
+        background: #333;
+    }
+
+    .disclaimer {
+        color: #aaa;
+    }
+}
+
+/* 動畫優化 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
