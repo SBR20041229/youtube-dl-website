@@ -1,6 +1,6 @@
-Flask==2.0.1
+Flask==2.3.3
 Werkzeug==2.3.7
-yt-dlp==2023.12.30
+yt-dlp
 gunicorn==20.1.0
 urllib3==1.26.18
 requests==2.31.0
